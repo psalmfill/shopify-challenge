@@ -146,6 +146,9 @@
                             </div>
                         @endif
                     @endforeach
+                    @if (!count($files))
+                        <div class="alert alert-info w-100 text-center">Empty</div>
+                    @endif
                 </div>
             </div>
         </div>
