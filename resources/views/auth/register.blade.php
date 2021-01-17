@@ -8,6 +8,8 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body pl-5 pr-5">
+                    <h1 class="text-center mb-3">Welcome to {{ config('app.name', 'Laravel') }}</h1>
+
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 

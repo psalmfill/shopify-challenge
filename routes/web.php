@@ -26,5 +26,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/configurations', 'HomeController@configurations')->name('configurations');
     Route::post('/configurations/reset-api-keys', 'HomeController@resetApiKey')->name('configurations.rest_api_keys');
+    Route::post('/configurations/update-profile', 'HomeController@updateProfile')->name('configurations.updateProfile');
     Route::resources(['folders' => 'FolderController', 'images' => 'ImageController']);
 });

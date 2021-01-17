@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Folder;
 use App\Models\Image;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -78,5 +80,25 @@ class HomeController extends Controller
         $user->api_secret_key = 'IR-SKEY-' . Str::random();
         $user->save();
         return redirect()->back()->with('message', 'API Keys reset successful');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'password' => ['nullable', 'string', 'min:6', 'confirmed'],
+        ]);
+
+        if (array_key_exists('password', $validatedData) and $validatedData['password'] != null) {
+            $validatedData['password'] = Hash::make($validatedData['password']);
+        } else {
+            $validatedData = $request->only('name');
+        }
+        try {
+            auth()->user()->update($validatedData);
+            return redirect()->back()->with('message', 'Profile update successful');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Fail  updating profile successful');
+        }
     }
 }

@@ -31,7 +31,8 @@
                     <div class="col-md-8">
                         <h2>Profile Settings</h2>
                         <hr>
-                        <form action="" method="post">
+                        <form action="{{route('configurations.updateProfile')}}" method="post">
+                            @csrf
                             <div class="form-group">
                                 <label for="">Name</label>
                                 <input type="text" name="name" placeholder="Name" value="{{$user->name}}" class="form-control">
@@ -44,12 +45,12 @@
 
                             <div class="form-group">
                                 <label for="">New Password</label>
-                                <input type="text" name="name" placeholder="New Password" class="form-control">
+                                <input type="text" name="password" placeholder="New Password" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label for="">Confirm Password</label>
-                                <input type="text" name="name" placeholder="Confirm Passwod" class="form-control">
+                                <input type="text" name="password_confirmation" placeholder="Confirm Passwod" class="form-control">
                             </div>
                             <button class="btn btn-primary float-right">Save Changes</button>
                         </form>
@@ -76,7 +77,12 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="api" role="tabpanel" aria-labelledby="api-tab">...</div>
+            <div class="tab-pane fade" id="api" role="tabpanel" aria-labelledby="api-tab">
+               <p>Hello {{$user->name}},</p> 
+               <p>We allow you to integrate our api in you access you content on our platform using our api.
+                The documentation for our API can be found here.</p> 
+                <a href="https://documenter.getpostman.com/view/7953150/TVzVivqW">https://documenter.getpostman.com/view/7953150/TVzVivqW</a>
+            </div>
         </div>
     </div>
 @endsection
